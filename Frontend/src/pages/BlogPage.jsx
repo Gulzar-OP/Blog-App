@@ -11,7 +11,7 @@ export default function BlogPage() {
     const fetchBlog = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/blogs/single-blog/${id}`,
+          `/api/blogs/single-blog/${id}`,
           { withCredentials: true }
         );
         setBlog(response.data);

@@ -37,7 +37,7 @@ export default function AuthProvider({ children }) {
                 const token = Cookies.get("authToken");
                 console.log("token:  ",token)
                 const response = await axios.get(
-                "http://localhost:3000/api/users/my-profile",
+                "/api/users/my-profile",
                 { withCredentials: true }
                 );
                 
@@ -52,7 +52,7 @@ export default function AuthProvider({ children }) {
 
         const fetchBlogs = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/blogs/all-blogs");
+                const response = await axios.get("/api/blogs/all-blogs");
                 // console.log(response);
                 setBlogs(response.data.blogs);
             } catch (e) {

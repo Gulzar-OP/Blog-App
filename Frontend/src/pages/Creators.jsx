@@ -8,7 +8,7 @@ export default function Creators() {
     const fetchAdmin = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:3000/api/users/getAdmin"
+          "/api/users/getAdmin"
         );
         // console.log(data)
         setAdmins(data);

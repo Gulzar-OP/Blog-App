@@ -7,7 +7,7 @@ export default function Blogs() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const { data } = await axios.get("http://localhost:3000/api/blogs/all-blogs");
+        const { data } = await axios.get("/api/blogs/all-blogs");
         console.log(data.blogs)
         setBlogs(data.blogs);
       } catch (error) {

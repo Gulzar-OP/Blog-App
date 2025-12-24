@@ -39,7 +39,7 @@ export default function Register() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/api/users/register",
+        "/api/users/register",
         formData,
         {
           headers: {

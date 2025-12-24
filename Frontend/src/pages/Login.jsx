@@ -17,7 +17,7 @@ export default function Login() {
     }
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/api/users/login",
+        "/api/users/login",
         {email,role,password},
         {
           headers: {
