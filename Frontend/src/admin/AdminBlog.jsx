@@ -13,7 +13,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 
-const API_URL = "http://localhost:3000";
+// const API_URL = "http://localhost:3000";
+const API_URL="http://blog-app-back-nine.vercel.app"
 
 export default function AdminBlog() {
   const [blogs, setBlogs] = useState([]);

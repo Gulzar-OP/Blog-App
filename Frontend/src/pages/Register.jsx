@@ -23,6 +23,7 @@ export default function Register() {
     role: "",
     education: "",
   });
+  const API_URL="http://blog-app-back-nine.vercel.app"
   const [photo, setPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState("");
   const [loading, setLoading] = useState(false);
@@ -83,7 +84,7 @@ export default function Register() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/api/users/register",
+        `${API_URL}/api/users/register`,
         registerData,
         {
           headers: {

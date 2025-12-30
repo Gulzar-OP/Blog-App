@@ -5,7 +5,8 @@ import Cookies from 'js-cookie';
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
-    const url = "http://localhost:3000";
+    // const url = "http://localhost:3000";
+const API_URL="http://blog-app-back-nine.vercel.app"
     const [blogs, setBlogs] = useState([]);
     const [profile, setProfile] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -26,7 +27,7 @@ export default function AuthProvider({ children }) {
                 return;
             }
 
-            const response = await axios.get('/api/users/my-profile', {
+            const response = await axios.get(`${API_URL}/api/users/my-profile`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -47,7 +48,7 @@ export default function AuthProvider({ children }) {
     // Fetch blogs with auth
     const fetchBlogs = useCallback(async () => {
         try {
-            const response = await axios.get('/api/blogs/all-blogs');
+            const response = await axios.get(`${API_URL}/api/blogs/all-blogs`);
             setBlogs(response.data.blogs || []);
         } catch (error) {
             console.error('Failed to fetch blogs:', error);

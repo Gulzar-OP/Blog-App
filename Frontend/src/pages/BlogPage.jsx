@@ -16,7 +16,7 @@ export default function BlogPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const ref = useRef(null);
-
+const API_URL="http://blog-app-back-nine.vercel.app"
   const [blog, setBlog] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -38,7 +38,7 @@ export default function BlogPage() {
       try {
         setLoading(true);
         const res = await axios.get(
-          `http://localhost:3000/api/blogs/single-blog/${id}`
+          `${API_URL}/api/blogs/single-blog/${id}`
         );
         setBlog(res.data);
       } catch (err) {

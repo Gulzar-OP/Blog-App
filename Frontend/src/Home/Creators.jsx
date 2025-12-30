@@ -6,14 +6,14 @@ import { UserIcon, CodeBracketIcon, AcademicCapIcon } from "@heroicons/react/24/
 export default function Creators() {
   const [admin, setAdmin] = useState([]);
   const [loading, setLoading] = useState(true);
-  const url = "http://localhost:3000";
-
+  // const url = "http://localhost:3000";
+const API_URL="http://blog-app-back-nine.vercel.app"
   useEffect(() => {
     const fetchAdmin = async () => {
       try {
         setLoading(true);
         const { data } = await axios.get(
-          `${url}/api/users/getAdmin`,
+          `${API_URL}/api/users/getAdmin`,
           { withCredentials: true }
         );
         setAdmin(data.slice(0, 8)); // Show up to 8 creators

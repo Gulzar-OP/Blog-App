@@ -18,12 +18,12 @@ export default function Blogs() {
       minute: "2-digit",
     });
   }
-
+const API_URL="http://blog-app-back-nine.vercel.app"
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get("http://localhost:3000/api/blogs/all-blogs");
+        const { data } = await axios.get(`${API_URL}/api/blogs/all-blogs`);
         setBlogs(data.blogs);
       } catch (error) {
         console.log("Error fetching blogs:", error);

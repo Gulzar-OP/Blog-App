@@ -4,11 +4,11 @@ import axios from "axios";
 export default function MyBlogs() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
-
+const API_URL="http://blog-app-back-nine.vercel.app"
   const fetchMyBlogs = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/blogs/my-blogs",
+        `${API_URL}/api/blogs/my-blogs`,
         { withCredentials: true }
       );
       setBlogs(response.data.blogs || []);

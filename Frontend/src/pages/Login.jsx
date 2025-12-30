@@ -16,7 +16,7 @@ export default function Login() {
   const [role, setRole] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
+const API_URL="http://blog-app-back-nine.vercel.app"
   // 🔄 Login Submit Handler (Fixed endpoint name)
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -28,7 +28,7 @@ export default function Login() {
     setIsLoading(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/api/users/login",
+        `${API_URL}/api/users/login`,
         { email, role, password },
         {
           headers: {

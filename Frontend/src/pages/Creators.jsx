@@ -7,15 +7,16 @@ export default function Creators() {
   const [admins, setAdmins] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const url = "http://localhost:3000";
+  // const url = "http://localhost:3000";
 
+  const API_URL="http://blog-app-back-nine.vercel.app"
   useEffect(() => {
     const fetchAdmin = async () => {
       try {
         setLoading(true);
         setError(null);
         const { data } = await axios.get(
-          `${url}/api/users/getAdmin`,
+          `${API_URL}/api/users/getAdmin`,
           { withCredentials: true }
         );
         

@@ -92,6 +92,11 @@ app.get((req, res) => {
 });
 
 
+app.get((req, res) => {
+  res.send("hii")
+});
+
+
 const PORT = process.env.PORT || 3000;
 
 const startServer = async () => {

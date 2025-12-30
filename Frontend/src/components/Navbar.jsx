@@ -11,7 +11,8 @@ import {
 } from "react-icons/fa";
 import axios from "axios";
 
-const API_URL = "http://localhost:3000";
+// const API_URL = "http://localhost:3000";
+const API_URL="http://blog-app-back-nine.vercel.app"
 
 export default function Navbar() {
   const [login, setLogin] = useState(false);
