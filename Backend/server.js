@@ -104,7 +104,6 @@ const startServer = async () => {
         await ConnectDB();
         app.listen(PORT, () => {
             console.log(`🚀 Server running on http://localhost:${PORT}`);
-            console.log(`📱 Frontend: ${process.env.FRONTEND_URL || 'http://localhost:5173'}`);
         });
     } catch (error) {
         console.error('❌ Failed to start server:', error);

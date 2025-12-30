@@ -15,7 +15,7 @@ import axios from "axios";
 // const API_URL="http://blog-app-back-nine.vercel.app"
 const API_URL = import.meta.env.VITE_API_URL;
 
-
+console.log(import.meta.env.VITE_API_URL);
 export default function Navbar() {
   const [login, setLogin] = useState(false);
   const [data, setData] = useState(null);

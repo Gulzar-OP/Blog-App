@@ -242,7 +242,7 @@ export default function Footer() {
         </motion.div>
       </div>
 
-      <style jsx>{`
+      {/* <style jsx>{`
         .bg-dark-grid {
           background-image: 
             linear-gradient(rgba(168, 85, 247, 0.08) 1px, transparent 1px),
@@ -263,7 +263,7 @@ export default function Footer() {
         .animate-shimmer { 
           animation: shimmer 3s infinite; 
         }
-      `}</style>
+      `}</style> */}
     </footer>
   );
 }

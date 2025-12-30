@@ -10,6 +10,8 @@ export default function Creators() {
 // const API_URL="http://blog-app-back-nine.vercel.app"
 
 const API_URL = import.meta.env.VITE_API_URL;
+console.log(API_URL)
+
 useEffect(() => {
     const fetchAdmin = async () => {
       try {
@@ -18,7 +20,8 @@ useEffect(() => {
           `${API_URL}/api/users/getAdmin`,
           { withCredentials: true }
         );
-        setAdmin(data.slice(0, 8)); // Show up to 8 creators
+        setAdmin(Array.isArray(data.admin) ? data.admin.slice(0, 8) : []);
+
       } catch (error) {
         console.log("Error fetching admin:", error);
       } finally {
@@ -28,6 +31,8 @@ useEffect(() => {
 
     fetchAdmin();
   }, []);
+// const admins = Array.isArray(admin) ? admin : [admin];
+
 
   const getRoleIcon = (role) => {
     switch (role?.toLowerCase()) {

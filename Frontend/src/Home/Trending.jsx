@@ -75,7 +75,7 @@ export default function Trending() {
       </div>
 
       {/* Carousel */}
-      <div className="relative">
+      <div className="relative ">
         <Carousel
           responsive={responsive}
           ssr={true}
@@ -95,10 +95,10 @@ export default function Trending() {
             <Link
               to={`/blog/${element._id}`}
               key={element._id}
-              className="block mx-4 first:ml-0 last:mr-0 group relative bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-3xl border border-white/50 hover:border-orange-200/70 overflow-hidden transform hover:-translate-y-4 transition-all duration-700 ease-out h-[480px] flex flex-col"
+              className="block  mx-4 first:ml-0 last:mr-0 group relative bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-3xl border border-white/50 hover:border-orange-200/70 overflow-hidden transform hover:-translate-y-4 transition-all duration-700 ease-out h-[480px] flex flex-col"
             >
               {/* Decorative Badge */}
-              <div className="absolute top-6 right-6 z-20">
+              <div className="absolute top-6 right-6 z-20 ">
                 <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-yellow-500 rounded-2xl p-1 shadow-2xl transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-700">
                   <div className="w-full h-full bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg">
                     <svg className="w-8 h-8 text-orange-600 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

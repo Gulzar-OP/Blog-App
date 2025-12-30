@@ -140,24 +140,7 @@ export default function NotFound() {
         </motion.p>
       </div>
 
-      <style jsx>{`
-        .bg-grid-error {
-          background-image: 
-            linear-gradient(rgba(168, 85, 247, 0.06) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(168, 85, 247, 0.06) 1px, transparent 1px);
-          background-size: 60px 60px;
-        }
-        @keyframes float-slow {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-        @keyframes bounce-slow {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-12px); }
-        }
-        .animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
-        .animate-bounce-slow { animation: bounce-slow 3s ease-in-out infinite; }
-      `}</style>
+
     </div>
   );
 }
