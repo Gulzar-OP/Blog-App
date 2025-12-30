@@ -6,7 +6,8 @@ export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
     // const url = "http://localhost:3000";
-const API_URL="http://blog-app-back-nine.vercel.app"
+// const API_URL="http://blog-app-back-nine.vercel.app"
+const API_URL = import.meta.env.VITE_API_URL;
     const [blogs, setBlogs] = useState([]);
     const [profile, setProfile] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -15,7 +16,7 @@ const API_URL="http://blog-app-back-nine.vercel.app"
     // Axios default config with credentials
     useEffect(() => {
         axios.defaults.withCredentials = true;
-        axios.defaults.baseURL = url;
+        axios.defaults.baseURL = API_URL;
     }, []);
 
     // Fetch profile and check auth

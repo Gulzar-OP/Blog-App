@@ -16,7 +16,8 @@ export default function BlogPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const ref = useRef(null);
-const API_URL="http://blog-app-back-nine.vercel.app"
+// const API_URL="http://blog-app-back-nine.vercel.app"
+const API_URL = import.meta.env.VITE_API_URL;
   const [blog, setBlog] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);

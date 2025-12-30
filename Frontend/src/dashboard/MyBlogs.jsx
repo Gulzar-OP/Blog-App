@@ -4,7 +4,8 @@ import axios from "axios";
 export default function MyBlogs() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
-const API_URL="http://blog-app-back-nine.vercel.app"
+// const API_URL="http://blog-app-back-nine.vercel.app"
+const API_URL = import.meta.env.VITE_API_URL;
   const fetchMyBlogs = async () => {
     try {
       const response = await axios.get(

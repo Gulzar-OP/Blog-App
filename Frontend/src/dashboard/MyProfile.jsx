@@ -15,7 +15,8 @@ import toast from 'react-hot-toast';
 import { motion } from "framer-motion";
 
 // const API_URL = 'http://localhost:3000';
-const API_URL="http://blog-app-back-nine.vercel.app"
+// const API_URL="http://blog-app-back-nine.vercel.app"
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function MyProfile() {
   const [user, setUser] = useState(null);

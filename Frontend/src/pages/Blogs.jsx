@@ -18,7 +18,8 @@ export default function Blogs() {
       minute: "2-digit",
     });
   }
-const API_URL="http://blog-app-back-nine.vercel.app"
+// const API_URL="http://blog-app-back-nine.vercel.app"
+const API_URL = import.meta.env.VITE_API_URL;
   useEffect(() => {
     const fetchBlogs = async () => {
       try {

@@ -23,7 +23,8 @@ export default function Register() {
     role: "",
     education: "",
   });
-  const API_URL="http://blog-app-back-nine.vercel.app"
+  // const API_URL="http://blog-app-back-nine.vercel.app"
+  const API_URL = import.meta.env.VITE_API_URL;
   const [photo, setPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState("");
   const [loading, setLoading] = useState(false);

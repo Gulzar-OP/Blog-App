@@ -16,7 +16,8 @@ export default function Login() {
   const [role, setRole] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-const API_URL="http://blog-app-back-nine.vercel.app"
+// const API_URL="http://blog-app-back-nine.vercel.app"
+const API_URL = import.meta.env.VITE_API_URL;
   // 🔄 Login Submit Handler (Fixed endpoint name)
   const handleLogin = async (e) => {
     e.preventDefault();

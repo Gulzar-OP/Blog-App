@@ -7,8 +7,10 @@ export default function Creators() {
   const [admin, setAdmin] = useState([]);
   const [loading, setLoading] = useState(true);
   // const url = "http://localhost:3000";
-const API_URL="http://blog-app-back-nine.vercel.app"
-  useEffect(() => {
+// const API_URL="http://blog-app-back-nine.vercel.app"
+
+const API_URL = import.meta.env.VITE_API_URL;
+useEffect(() => {
     const fetchAdmin = async () => {
       try {
         setLoading(true);

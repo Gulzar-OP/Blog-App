@@ -9,7 +9,8 @@ export default function Creators() {
   const [error, setError] = useState(null);
   // const url = "http://localhost:3000";
 
-  const API_URL="http://blog-app-back-nine.vercel.app"
+  // const API_URL="http://blog-app-back-nine.vercel.app"
+  const API_URL = import.meta.env.VITE_API_URL;
   useEffect(() => {
     const fetchAdmin = async () => {
       try {
