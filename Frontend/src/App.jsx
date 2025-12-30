@@ -8,11 +8,13 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Dashboard from './pages/Dashboard.jsx';
+// import Dashboard from './pages/Dashboard.jsx';
 import Creators from './pages/Creators';
 import { Toaster } from 'react-hot-toast';
 import BlogPage from "./pages/BlogPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import AdminBlog from './admin/AdminBlog.jsx';
+import MyProfile from './dashboard/MyProfile.jsx';
 
 export default function App() {
   const location = useLocation();
@@ -38,8 +40,11 @@ export default function App() {
         <Route path="/register" element={<Register />} />
 
         {/* Dashboard Nested Route */}
-        <Route path="/dashboard" element={<Dashboard />} />
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
 
+        {/* admin Route */}
+        <Route path='/admin-blog' element={< AdminBlog/>} />
+        <Route path='/my-profile' element={< MyProfile/>} />
         {/* 404 */}
         <Route path="/*" element={<NotFound />} />
       </Routes>

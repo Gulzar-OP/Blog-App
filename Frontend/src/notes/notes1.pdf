@@ -1,0 +1,60 @@
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if (!emailRegex.test(email)) {
+    fs.unlinkSync(photo.tempFilePath);
+    return res.status(400).json({ message: "Invalid email format" });
+}
+---------------------------------------
+Part	    Meaning
+^	        String ka start
+[^\s@]+	    @ aur space ke alawa kam se kam 1 character
+@	        @ symbol (required)
+[^\s@]+	    Domain name (gmail, yahoo etc.)
+\.	        Dot . compulsory
+[^\s@]+	    Domain extension (com, in, org)
+$	        String ka end
+
+emailRegex.test(email)
+.test() true deta hai agar email regex se match kare
+false deta hai agar match na kare
+
+🎯 Interview one-liner
+“Regex ka use email ka basic format validate karne ke liye kiya gaya hai, aur agar email invalid ho to uploaded temp file ko delete karke request ko reject kar diya jata hai.”
+
+-----------------------------------------
+const phoneRegex = /^[6-9]\d{9}$/;
+
+^ → start
+[6-9] → number 6,7,8,9 se start hoga
+\d{9} → baaki 9 digits
+$ → end
+
+🎯 Interview one-liner
+“Indian mobile numbers 10 digit hote hain aur 6–9 se start hote hain, isliye regex me [6-9]\d{9} use kiya gaya hai.”
+------------------------------------------
+secure: process.env.NODE_ENV === 'production'
+Environment	Value	Cookie behavior
+development	false	HTTP pe cookie kaam karegi
+production	true	Sirf HTTPS pe cookie jayegi
+
+❌ Agar production me secure: false rakho
+Cookie HTTP pe bhi send ho jayegi ❌
+Man-in-the-middle attack ka risk ⚠️
+Security issue (interview red flag)
+
+❌ Agar development me secure: true rakho
+localhost HTTP hai
+Cookie browser me set hi nahi hogi
+Login kaam nahi karega ❌
+-----------------------------------------
+❓ sameSite kya hota hai?
+sameSite browser ko batata hai:
+Cookie kab aur kis request ke sath bhejni hai
+Matlab:
+Same website se request → cookie jayegi
+Dusri website se request → cookie jayegi ya nahi
+🔹 sameSite: 'strict' ka matlab
+➜ Sabse strict rule 🔐
+✔ Cookie sirf same-site requests ke sath jayegi
+❌ Agar request dusri website se aayi → cookie nahi jayegi

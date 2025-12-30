@@ -5,7 +5,6 @@ export const isAuthenticated = async (req, res, next) => {
     try {
         // Get token from cookies
         const token = req.cookies?.authToken;
-
         // console.log("Auth Token from Cookie:", token);
 
         if (!token) {

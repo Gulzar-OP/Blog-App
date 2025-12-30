@@ -14,12 +14,19 @@ export const generateAuthToken = async (user, res) => {
 
     res.cookie("authToken", token, {
         httpOnly: true,
-        secure: false,       // FIXED
-        sameSite: "Lax",     // FIXED
-        path: "/",           
+        secure: false,
+        sameSite: "Lax",
+        path: "/",
+        maxAge: 1000 * 60 * 60, // 1 hour (matches JWT expiresIn)
+        // OR expires: new Date(Date.now() + 1000 * 60 * 60)
     });
 
-    await User.findByIdAndUpdate(user._id, { token });
+
+    // await User.findByIdAndUpdate(user._id, { token });
+    await User.findByIdAndUpdate(user._id, { 
+    lastLogin: new Date(),
+    isActive: true 
+});
 
     return token;
 };

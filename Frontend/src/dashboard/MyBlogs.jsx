@@ -8,7 +8,7 @@ export default function MyBlogs() {
   const fetchMyBlogs = async () => {
     try {
       const response = await axios.get(
-        "/api/blogs/my-blogs",
+        "http://localhost:3000/api/blogs/my-blogs",
         { withCredentials: true }
       );
       setBlogs(response.data.blogs || []);

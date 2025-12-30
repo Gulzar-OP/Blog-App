@@ -1,74 +1,92 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import axios from "axios";
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
+    const url = "http://localhost:3000";
     const [blogs, setBlogs] = useState([]);
-    const [profile, setProfile] = useState([]);
+    const [profile, setProfile] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [loading, setLoading] = useState(true);
 
+    // Axios default config with credentials
     useEffect(() => {
-        // const fetchProfile = async () => {
-        //     try {
-        //         const token = Cookies.get("authToken")
-        //         console.log("Token is here: ",token)
-        //     const response = await axios.get(
-        //         "http://localhost:3000/api/users/my-profile",
-        //         {
-        //         withCredentials: true,
-        //         headers: { "Content-Type": "application/json" },
-        //         }
-        //     );
-
-        //     // console.log(response.data); // check once
-
-        //     setProfile(response.data);   // correct
-        //     setIsAuthenticated(true);
-        //     } catch (e) {
-        //     console.log(e);
-        //     }
-        // }
-
-        const fetchProfile = async () => {
-            
-            try {
-                const token = Cookies.get("authToken");
-                console.log("token:  ",token)
-                const response = await axios.get(
-                "/api/users/my-profile",
-                { withCredentials: true }
-                );
-                
-                setProfile(response.data);
-                setIsAuthenticated(true);
-
-            } catch (e) {
-                setIsAuthenticated(false);
-            }
-        }
-
-
-        const fetchBlogs = async () => {
-            try {
-                const response = await axios.get("/api/blogs/all-blogs");
-                // console.log(response);
-                setBlogs(response.data.blogs);
-            } catch (e) {
-                console.log(e);
-            }
-        };
-        fetchBlogs();
-        fetchProfile();
+        axios.defaults.withCredentials = true;
+        axios.defaults.baseURL = url;
     }, []);
 
+    // Fetch profile and check auth
+    const checkAuth = useCallback(async () => {
+        try {
+            const token = Cookies.get("authToken");
+            if (!token) {
+                setIsAuthenticated(false);
+                return;
+            }
+
+            const response = await axios.get('/api/users/my-profile', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            
+            setProfile(response.data);
+            setIsAuthenticated(true);
+        } catch (error) {
+            console.error('Auth check failed:', error);
+            Cookies.remove("authToken");
+            setIsAuthenticated(false);
+            setProfile(null);
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    // Fetch blogs with auth
+    const fetchBlogs = useCallback(async () => {
+        try {
+            const response = await axios.get('/api/blogs/all-blogs');
+            setBlogs(response.data.blogs || []);
+        } catch (error) {
+            console.error('Failed to fetch blogs:', error);
+            setBlogs([]);
+        }
+    }, []);
+
+    // Initial load
+    useEffect(() => {
+        checkAuth();
+        fetchBlogs();
+    }, [checkAuth, fetchBlogs]);
+
+    // Refresh blogs function
+    const refreshBlogs = useCallback(() => {
+        fetchBlogs();
+    }, [fetchBlogs]);
+
+    const value = {
+        blogs,
+        profile,
+        isAuthenticated,
+        loading,
+        refreshBlogs,
+        checkAuth
+    };
+
     return (
-        <AuthContext.Provider value={{ blogs,profile,isAuthenticated }}>
+        <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
     );
-};
+}
 
-// hook
-export const useAuth = () => useContext(AuthContext);
+// Custom hook
+export const useAuth = () => {
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error('useAuth must be used within AuthProvider');
+    }
+    return context;
+};
