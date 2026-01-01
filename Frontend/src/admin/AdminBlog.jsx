@@ -12,6 +12,7 @@ import {
   CheckIcon,
 } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
+import Notification from "../components/Notification";
 
 // const API_URL = "http://localhost:3000";
 // const API_URL="http://blog-app-back-nine.vercel.app"
@@ -35,6 +36,17 @@ export default function AdminBlog() {
   const [imagePreview, setImagePreview] = useState(null);
 
   const fileInputRef = useRef(null);
+const createPost = () => {
+  socket.emit("new-post", {
+    title: "MERN Developer Job 🚀"
+  });
+};
+
+const deletePost = () => {
+  socket.emit("delete-post", {
+    title: "MERN Developer Job 🚀"
+  });
+};
 
   /* ---------------- FETCH BLOGS ---------------- */
   const fetchBlogs = async () => {
@@ -169,7 +181,7 @@ export default function AdminBlog() {
 
   /* ---------------- DELETE ---------------- */
   const handleDelete = async (id) => {
-    if (!confirm("Are you sure you want to delete this blog?")) return;
+    // if (!confirm("Are you sure you want to delete this blog?")) return;
 
     try {
       await axios.delete(
@@ -464,13 +476,17 @@ export default function AdminBlog() {
                       </>
                     ) : editingId ? (
                       <>
-                        <CheckIcon className="w-8 h-8" />
-                        Update Blog
+                        <div onClick={createPost}>
+                          <CheckIcon className="w-8 h-8" />
+                          Update Blog
+                        </div>
                       </>
                     ) : (
                       <>
-                        <CheckIcon className="w-8 h-8" />
-                        Create Blog
+                        <div onClick={createPost}>
+                          <CheckIcon className="w-8 h-8" />
+                          Create Blog
+                        </div>
                       </>
                     )}
                   </motion.button>
@@ -572,7 +588,7 @@ export default function AdminBlog() {
                         className="p-4 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white rounded-3xl shadow-2xl hover:shadow-red-500/50 backdrop-blur-xl border border-red-500/50 transition-all duration-300"
                         title="Delete"
                       >
-                        <TrashIcon className="w-6 h-6" />
+                        <TrashIcon className="w-6 h-6" onClick={deletePost} />
                       </motion.button>
                     </motion.div>
                   </div>

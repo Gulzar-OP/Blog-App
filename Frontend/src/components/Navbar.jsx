@@ -3,12 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { AiOutlineMenu } from "react-icons/ai";
 import { IoCloseSharp } from "react-icons/io5";
-import { 
-  FaUser, 
-  FaSignOutAlt, 
-  FaCog,
-  FaPlus 
-} from "react-icons/fa";
+import { FaUser, FaSignOutAlt, FaCog, FaPlus } from "react-icons/fa";
 import axios from "axios";
 
 // const API_URL = "http://localhost:3000";
@@ -35,10 +30,9 @@ export default function Navbar() {
   /* ---------------- FETCH PROFILE ---------------- */
   const fetchProfile = async () => {
     try {
-      const res = await axios.get(
-        `${API_URL}/api/users/my-profile`,
-        { withCredentials: true }
-      );
+      const res = await axios.get(`${API_URL}/api/users/my-profile`, {
+        withCredentials: true,
+      });
       setData(res.data);
       setLogin(true);
     } catch (err) {
@@ -78,25 +72,27 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-3xl bg-zinc-900/95 border-b border-zinc-700/50 shadow-2xl shadow-zinc-900/50 py-4 px-6 md:px-12 lg:px-24">
       {/* Animated Background Glow */}
       <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-transparent to-pink-500/5 blur-xl animate-pulse" />
-      
+
       <div className="relative max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           className="flex items-center gap-3"
         >
-         
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="text-white text-2xl md:text-3xl font-black bg-gradient-to-r from-zinc-200 via-white to-zinc-300 bg-clip-text tracking-tight hover:from-purple-400 hover:to-pink-400 transition-all duration-500"
           >
-            Gul<span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500 bg-clip-text text-blue-500">Blog</span>
+            Gul
+            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500 bg-clip-text text-blue-500">
+              Blog
+            </span>
           </Link>
         </motion.div>
 
         {/* Desktop Menu */}
-        <motion.ul 
+        <motion.ul
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="hidden md:flex items-center space-x-2 lg:space-x-8"
@@ -107,7 +103,7 @@ export default function Navbar() {
             { path: "/creators", label: "CREATORS" },
             { path: "/games", label: "GAMES" },
             { path: "/about", label: "ABOUT" },
-            { path: "/contact", label: "CONTACT" }
+            { path: "/contact", label: "CONTACT" },
           ].map((item, i) => (
             <motion.li
               key={item.path}
@@ -135,7 +131,7 @@ export default function Navbar() {
               {data?.role === "admin" && (
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  onClick={()=>navigate("/admin-blog")}
+                  onClick={() => navigate("/admin-blog")}
                   className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-500/20 to-green-500/20 backdrop-blur-xl rounded-2xl border border-emerald-400/40 text-emerald-300 hover:text-emerald-100 font-semibold text-sm shadow-lg hover:shadow-emerald-500/25 transition-all duration-300"
                 >
                   <FaPlus className="w-4 h-4" />
@@ -158,7 +154,7 @@ export default function Navbar() {
                 {/* Profile Dropdown - WRAPPED IN AnimatePresence */}
                 <AnimatePresence>
                   {showProfileDropdown && (
-                    <motion.div 
+                    <motion.div
                       initial={{ opacity: 0, scale: 0.95, y: -10 }}
                       animate={{ opacity: 1, scale: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95, y: -10 }}
@@ -173,21 +169,27 @@ export default function Navbar() {
                             {data?.name?.charAt(0)?.toUpperCase()}
                           </div>
                           <div>
-                            <p className="font-bold text-white text-lg">{data?.name}</p>
-                            <p className="text-zinc-400 text-sm">{data?.role?.toUpperCase()}</p>
+                            <p className="font-bold text-white text-lg">
+                              {data?.name}
+                            </p>
+                            <p className="text-zinc-400 text-sm">
+                              {data?.role?.toUpperCase()}
+                            </p>
                           </div>
                         </div>
                       </div>
-                      
+
                       <Link
                         to="/my-profile"
                         className="flex items-center gap-4 px-6 py-4 hover:bg-zinc-800/50 transition-all duration-300 border-b border-zinc-700/50 last:border-b-0"
                         onClick={() => setShowProfileDropdown(false)}
                       >
                         <FaUser className="w-5 h-5 text-zinc-400" />
-                        <span className="font-semibold text-zinc-300">Profile</span>
+                        <span className="font-semibold text-zinc-300">
+                          Profile
+                        </span>
                       </Link>
-                      
+
                       <button
                         onClick={logout}
                         className="text-white flex items-center gap-4 w-full px-6 py-4 hover:bg-red-500/20 hover:text-red-300 transition-all duration-300 text-left"
@@ -223,7 +225,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu Button */}
-        <motion.button 
+        <motion.button
           onClick={toggleMobileMenu}
           whileTap={{ scale: 0.95 }}
           className="md:hidden p-2 rounded-xl bg-zinc-800/50 backdrop-blur-xl border border-zinc-700/50 text-zinc-300 hover:bg-zinc-700/70 hover:text-white transition-all duration-300 shadow-lg"
@@ -254,7 +256,7 @@ export default function Navbar() {
                 { path: "/creators", label: "CREATORS" },
                 { path: "/games", label: "GAMES" },
                 { path: "/about", label: "ABOUT" },
-                { path: "/contact", label: "CONTACT" }
+                { path: "/contact", label: "CONTACT" },
               ].map((item, i) => (
                 <motion.div
                   key={item.path}
@@ -275,6 +277,7 @@ export default function Navbar() {
               {/* Auth Section */}
               {login ? (
                 <>
+                  {/* Admin Profile Link */}
                   {data?.role === "admin" && (
                     <motion.div whileHover={{ scale: 1.02 }}>
                       <Link
@@ -285,17 +288,22 @@ export default function Navbar() {
                         <FaPlus className="w-5 h-5" />
                         Add Blog
                       </Link>
-                      <Link
-                        to="/my-profile"
-                        onClick={closeMobileMenu}
-                        className="flex items-center gap-3 px-6 py-4 bg-zinc-800/60 rounded-2xl border border-zinc-600 text-zinc-200 hover:bg-zinc-700 w-full"
-                      >
-                        <FaUser className="w-5 h-5" />
-                        My Profile
-                      </Link>
                     </motion.div>
                   )}
-                  
+
+                  {/* User Profile Link (for both admin & user) */}
+                  <motion.div whileHover={{ scale: 1.02 }}>
+                    <Link
+                      to="/my-profile"
+                      onClick={closeMobileMenu}
+                      className="flex items-center gap-3 px-6 py-4 bg-zinc-800/60 rounded-2xl border border-zinc-600 text-zinc-200 hover:bg-zinc-700 w-full"
+                    >
+                      <FaUser className="w-5 h-5" />
+                      My Profile
+                    </Link>
+                  </motion.div>
+
+                  {/* Logout Button */}
                   <div className="pt-6 border-t border-zinc-700/50">
                     <button
                       onClick={logout}

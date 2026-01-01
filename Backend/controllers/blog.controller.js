@@ -3,68 +3,6 @@ import Blog from "../models/blog.model.js";
 import { v2 as cloudinary } from 'cloudinary';
 import User from "../models/user.model.js";
 
-// export const createBlog = async (req, res) => {
-//     try {
-//         if (!req.files || !req.files.blogImage) {
-//             return res.status(400).json({ message: "Blog image is required" });
-//         }
-
-//         const blogImage = req.files.blogImage;
-
-//         const allowedMimeTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-//         if (!allowedMimeTypes.includes(blogImage.mimetype)) {
-//             return res.status(400).json({ message: "Only jpg, jpeg and png files are allowed" });
-//         }
-
-//         const { title, category, about } = req.body;
-
-//         if (!title || !category || !about) {
-//             return res.status(400).json({ message: "All fields are required" });
-//         }
-
-//         const adminName = req?.user?.name;
-//         const adminPhoto = req?.user?.photo.url;
-//         const createdBy = req?.user?._id;
-
-//         const cloudinaryResponse = await cloudinary.uploader.upload(blogImage.tempFilePath);
-
-//         if (!cloudinaryResponse || cloudinaryResponse.error) {
-//             return res.status(500).json({ message: "Image upload failed" });
-//         }
-
-//         const blogData={
-//             title,
-//             category,
-//             about,
-//             adminName,
-//             adminPhoto,
-//             createdBy,
-//             blogImage: {
-//                 public_id: cloudinaryResponse.public_id,
-//                 url: cloudinaryResponse.secure_url
-//             }
-//         };
-//         const blog = new Blog(blogData);
-//         await blog.save();
-
-//         return res.status(201).json({
-//             success: true,
-//             message: "Blog created successfully",
-//             blog
-//         });
-
-//     } catch (error) {
-//         console.error(error);
-//         return res.status(500).json({
-//             success: false,
-//             message: error.message
-//         });
-//     }
-// };
-
-
-// ================= CREATE BLOG =================
-
 export const createBlog = async (req, res) => {
   try {
     const { title, category, about } = req.body;

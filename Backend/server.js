@@ -11,14 +11,15 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
-
+import http from "http";
+import { Server } from "socket.io";
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-
+const server = http.createServer(app);
 // ================= SECURITY MIDDLEWARE =================
 app.use(helmet()); // Security headers
 
@@ -30,14 +31,26 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
+
 // ================= CORS =================
+const allowedOrigins = [
+  "https://blog-app-giqg.vercel.app",
+  "http://localhost:5173",
+  "http://localhost:5174"
+];
+
 app.use(cors({
-  origin: [
-    "https://blog-app-giqg.vercel.app",   // frontend URL
-    "http://localhost:5173"
-  ],
+  origin: allowedOrigins,
   credentials: true
 }));
+
+const io = new Server(server, {
+  cors: {
+    origin: allowedOrigins,
+    credentials: true
+  }
+});
+
 
 // ================= BODY PARSERS =================
 app.use(cookieParser());
@@ -92,20 +105,26 @@ app.get((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
 
+// ================= socket=================
+io.on("connection", (socket) => {
+  console.log("User connected:", socket.id);
 
-app.get((req, res) => {
-  res.send("hii")
+  // Admin se event
+  socket.on("new-post", (postTitle) => {
+    console.log("New Post:", postTitle);
+
+    // Sab users ko notify
+    io.emit("notify-users", `New Post: ${postTitle}`);
+  });
 });
 
-
 const PORT = process.env.PORT || 3000;
-
 const startServer = async () => {
     try {
         await ConnectDB();
-        app.listen(PORT, () => {
-            console.log(`🚀 Server running on http://localhost:${PORT}`);
-        });
+        server.listen(PORT, () => {
+  console.log(`🚀 Server + Socket.IO running on http://localhost:${PORT}`);
+});
     } catch (error) {
         console.error('❌ Failed to start server:', error);
         process.exit(1);
@@ -113,7 +132,6 @@ const startServer = async () => {
 };
 
 startServer();
-
 // Graceful shutdown
 process.on('SIGTERM', () => {
     console.log('SIGTERM received, shutting down gracefully');
