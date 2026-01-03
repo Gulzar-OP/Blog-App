@@ -12,7 +12,7 @@ import {
   CheckIcon,
 } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
-import Notification from "../components/Notification";
+import socket from "../socket";
 
 // const API_URL = "http://localhost:3000";
 // const API_URL="http://blog-app-back-nine.vercel.app"
@@ -20,6 +20,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AdminBlog() {
   const [blogs, setBlogs] = useState([]);
+  const [notifications, setNotifications] = useState([]); 
   const [formData, setFormData] = useState({
     title: "",
     category: "",
@@ -36,19 +37,34 @@ export default function AdminBlog() {
   const [imagePreview, setImagePreview] = useState(null);
 
   const fileInputRef = useRef(null);
-const createPost = () => {
-  socket.emit("new-post", {
-    title: "MERN Developer Job 🚀"
-  });
-};
 
-const deletePost = () => {
-  socket.emit("delete-post", {
-    title: "MERN Developer Job 🚀"
-  });
-};
+  // Top inside component - Socket notifications
+  const createPostNotification = (blog) => {
+    socket.emit("new-post", {
+      id: blog._id,
+      title: blog.title,
+    });
+  };
 
-  /* ---------------- FETCH BLOGS ---------------- */
+  const deletePostNotification = (blog) => {
+    socket.emit("delete-post", {
+      id: blog._id,
+      title: blog.title,
+    });
+  };
+
+  // ✅ Fixed socket notification listener
+  useEffect(() => {
+    socket.on("new-notification", (data) => {
+      console.log("🔔 Notification:", data);
+      setNotifications((prev) => [...prev, { ...data, isRead: false }]);
+      toast.success(data.message || "New notification received!");
+    });
+
+    return () => socket.off("new-notification");
+  }, []);
+
+  // ✅ Fetch blogs
   const fetchBlogs = async () => {
     try {
       const res = await axios.get(`${API_URL}/api/blogs/all-blogs`);
@@ -63,7 +79,7 @@ const deletePost = () => {
     fetchBlogs();
   }, []);
 
-  /* ---------------- CLEANUP ---------------- */
+  // ✅ Cleanup image preview
   useEffect(() => {
     return () => {
       if (imagePreview?.startsWith("blob:")) {
@@ -72,7 +88,7 @@ const deletePost = () => {
     };
   }, [imagePreview]);
 
-  /* ---------------- INPUT HANDLER ---------------- */
+  // ✅ Input handler
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
 
@@ -89,7 +105,7 @@ const deletePost = () => {
     }
   };
 
-  /* ---------------- RESET FORM ---------------- */
+  // ✅ Reset form
   const resetForm = () => {
     setEditingId(null);
     setFormData({
@@ -104,7 +120,7 @@ const deletePost = () => {
     setShowForm(false);
   };
 
-  /* ---------------- CREATE BLOG ---------------- */
+  // ✅ Create blog
   const handleCreate = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -118,13 +134,18 @@ const deletePost = () => {
       const res = await axios.post(
         `${API_URL}/api/blogs/create`,
         fd,
-        { 
+        {
           withCredentials: true,
-          headers: { 'Content-Type': 'multipart/form-data' }
+          headers: { "Content-Type": "multipart/form-data" },
         }
       );
 
+      const createdBlog = res.data.blog;
       toast.success("Blog created successfully");
+
+      // ✅ Real-time notification
+      createPostNotification(createdBlog);
+
       resetForm();
       fetchBlogs();
     } catch (err) {
@@ -134,7 +155,7 @@ const deletePost = () => {
     }
   };
 
-  /* ---------------- EDIT ---------------- */
+  // ✅ Edit blog
   const handleEdit = (blog) => {
     setFormData({
       title: blog.title,
@@ -149,7 +170,7 @@ const deletePost = () => {
     setShowForm(true);
   };
 
-  /* ---------------- UPDATE ---------------- */
+  // ✅ Update blog
   const handleUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -179,23 +200,29 @@ const deletePost = () => {
     }
   };
 
-  /* ---------------- DELETE ---------------- */
+  // ✅ Delete blog
   const handleDelete = async (id) => {
-    // if (!confirm("Are you sure you want to delete this blog?")) return;
-
     try {
+      const blogToDelete = blogs.find((b) => b._id === id);
+
       await axios.delete(
         `${API_URL}/api/blogs/delete/${id}`,
         { withCredentials: true }
       );
+
       toast.success("Blog deleted successfully");
+
+      if (blogToDelete) {
+        deletePostNotification(blogToDelete);
+      }
+
       fetchBlogs();
     } catch (err) {
       toast.error("Delete failed");
     }
   };
 
-  /* ---------------- FILTER ---------------- */
+  // ✅ Filter blogs
   const filteredBlogs = blogs.filter((b) => {
     const matchSearch =
       b.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -210,8 +237,25 @@ const deletePost = () => {
 
   const categories = ["All", ...new Set(blogs.map((b) => b.category))];
 
+  // ✅ Unread notifications count
+  // const unreadCount = notifications.filter(n => !n.isRead).length;
+
   return (
     <div className="min-h-screen py-24 px-6 md:px-12 lg:px-24 bg-gradient-to-br from-black via-zinc-950/90 to-zinc-900/80 relative overflow-hidden">
+      {/* <Notification /> */}
+      
+      {/* Notification Badge - ✅ Fixed */}
+      {/* <div className="fixed top-24 right-12 z-50">
+        <div className="relative">
+          <IoIosNotificationsOutline size={28} className="text-zinc-400 hover:text-white cursor-pointer transition-colors" />
+          {unreadCount > 0 && (
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold">
+              {unreadCount}
+            </span>
+          )}
+        </div>
+      </div> */}
+
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-10 w-96 h-96 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-emerald-500/5 rounded-full blur-3xl animate-pulse" />
@@ -401,19 +445,6 @@ const deletePost = () => {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                  <div className="space-y-4">
-                    <label className="block text-xl font-black text-zinc-200 flex items-center gap-3">
-                      Admin Name
-                    </label>
-                    <input
-                      name="adminName"
-                      value={formData.adminName}
-                      onChange={handleInputChange}
-                      className="w-full px-8 py-6 border-2 border-zinc-700/50 rounded-4xl bg-zinc-900/70 backdrop-blur-xl text-xl font-semibold text-zinc-200 focus:outline-none focus:ring-4 focus:ring-purple-500/40 focus:border-purple-500/70 transition-all duration-500 placeholder-zinc-500"
-                      placeholder="Your display name"
-                    />
-                  </div>
-
                   {/* Image Upload */}
                   <div className="space-y-6">
                     <label className="block text-xl font-black text-zinc-200 flex items-center gap-3">
@@ -466,7 +497,7 @@ const deletePost = () => {
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={loading}
-                    className="flex-1 group bg-gradient-to-r from-emerald-600/95 to-green-600/95 hover:from-emerald-700 hover:to-green-700 text-white py-8 px-12 rounded-4xl shadow-2xl hover:shadow-emerald-500/60 backdrop-blur-xl border border-emerald-500/50 font-black text-2xl flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-500 overflow-hidden"
+                    className="flex-1 group bg-gradient-to-r from-emerald-600/95 to-green-600/95 hover:from-emerald-700 hover:to-green-700 text-white py-8 px-12 rounded-4xl shadow-2xl hover:shadow-emerald-500/60 backdrop-blur-xl border border-emerald-500/50 font-black text-2xl flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-500 overflow-hidden relative"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/50 to-green-500/50 -inset-1 blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     {loading ? (
@@ -476,17 +507,13 @@ const deletePost = () => {
                       </>
                     ) : editingId ? (
                       <>
-                        <div onClick={createPost}>
-                          <CheckIcon className="w-8 h-8" />
-                          Update Blog
-                        </div>
+                        <CheckIcon className="w-8 h-8" />
+                        Update Blog
                       </>
                     ) : (
                       <>
-                        <div onClick={createPost}>
-                          <CheckIcon className="w-8 h-8" />
-                          Create Blog
-                        </div>
+                        <CheckIcon className="w-8 h-8" />
+                        Create Blog
                       </>
                     )}
                   </motion.button>
@@ -588,7 +615,7 @@ const deletePost = () => {
                         className="p-4 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white rounded-3xl shadow-2xl hover:shadow-red-500/50 backdrop-blur-xl border border-red-500/50 transition-all duration-300"
                         title="Delete"
                       >
-                        <TrashIcon className="w-6 h-6" onClick={deletePost} />
+                        <TrashIcon className="w-6 h-6" />
                       </motion.button>
                     </motion.div>
                   </div>
@@ -642,14 +669,6 @@ const deletePost = () => {
           </motion.div>
         )}
       </div>
-
-      <style jsx>{`
-        @keyframes scan {
-          0% { background-position: 60px 0; }
-          100% { background-position: 0 0; }
-        }
-        .animate-scan { animation: scan 20s linear infinite; }
-      `}</style>
     </div>
   );
 }

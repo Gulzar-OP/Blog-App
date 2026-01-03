@@ -10,7 +10,7 @@ export default function Creators() {
 // const API_URL="http://blog-app-back-nine.vercel.app"
 
 const API_URL = import.meta.env.VITE_API_URL;
-console.log(API_URL)
+// console.log(API_URL)
 
 useEffect(() => {
     const fetchAdmin = async () => {

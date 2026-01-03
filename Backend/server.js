@@ -13,6 +13,11 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import http from "http";
 import { Server } from "socket.io";
+import notificationRoutes from "./routes/notification.route.js";
+import { initSocket } from "./socket.js";
+
+
+
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -20,6 +25,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const server = http.createServer(app);
+initSocket()
 // ================= SECURITY MIDDLEWARE =================
 app.use(helmet()); // Security headers
 
@@ -88,7 +94,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', userRoutes);
 app.use('/api/blogs', blogRoutes);
-
+app.use("/api/notifications", notificationRoutes);
 // ================= ERROR HANDLING =================
 app.use((err, req, res, next) => {
     console.error('Global error:', err);
@@ -106,17 +112,26 @@ app.get((req, res) => {
 });
 
 // ================= socket=================
+
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
 
-  // Admin se event
-  socket.on("new-post", (postTitle) => {
-    console.log("New Post:", postTitle);
+  // frontend se userId aayega
+  socket.on("join", (userId) => {
+    socket.join(userId); // 👈 room = userId
+    console.log(`User joined room: ${userId}`);
+  });
 
-    // Sab users ko notify
-    io.emit("notify-users", `New Post: ${postTitle}`);
+  socket.on("disconnect", () => {
+    console.log("User disconnected");
   });
 });
+
+
+
+
+export { io };
+
 
 const PORT = process.env.PORT || 3000;
 const startServer = async () => {

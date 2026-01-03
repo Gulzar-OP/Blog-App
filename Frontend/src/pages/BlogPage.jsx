@@ -80,9 +80,9 @@ const API_URL = import.meta.env.VITE_API_URL;
     },
     h1: ({ children }) => (
       <motion.h1 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        // initial={{ opacity: 0, y: 30 }}
+        // whileInView={{ opacity: 1, y: 0 }}
+        // viewport={{ once: true }}
         className="text-5xl md:text-7xl font-black mb-12 mt-20 bg-gradient-to-r from-zinc-100 to-zinc-300 bg-clip-text text-transparent leading-tight"
       >
         {children}
@@ -90,9 +90,9 @@ const API_URL = import.meta.env.VITE_API_URL;
     ),
     h2: ({ children }) => (
       <motion.h2 
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
+        // initial={{ opacity: 0, x: -20 }}
+        // whileInView={{ opacity: 1, x: 0 }}
+        // viewport={{ once: true }}
         className="text-4xl md:text-5xl font-black mt-20 mb-8 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent"
       >
         {children}
@@ -100,9 +100,9 @@ const API_URL = import.meta.env.VITE_API_URL;
     ),
     h3: ({ children }) => (
       <motion.h3 
-        initial={{ opacity: 0, x: 20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
+        // initial={{ opacity: 0, x: 20 }}
+        // whileInView={{ opacity: 1, x: 0 }}
+        // viewport={{ once: true }}
         className="text-3xl font-bold mt-16 mb-6 text-zinc-100"
       >
         {children}
@@ -110,9 +110,9 @@ const API_URL = import.meta.env.VITE_API_URL;
     ),
     p: ({ children }) => (
       <motion.p 
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        // initial={{ opacity: 0, y: 15 }}
+        // whileInView={{ opacity: 1, y: 0 }}
+        // viewport={{ once: true }}
         className="text-xl leading-10 text-zinc-200 mb-8 max-w-3xl"
       >
         {children}
@@ -120,9 +120,9 @@ const API_URL = import.meta.env.VITE_API_URL;
     ),
     blockquote: ({ children }) => (
       <motion.blockquote 
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
+        // initial={{ opacity: 0, scale: 0.95 }}
+        // whileInView={{ opacity: 1, scale: 1 }}
+        // viewport={{ once: true }}
         className="border-l-[6px] border-gradient-to-b from-cyan-400 to-blue-500 pl-10 pr-8 py-8 my-16 bg-zinc-900/50 backdrop-blur-xl rounded-2xl shadow-2xl italic text-zinc-100 relative before:absolute before:-left-1 before:top-4 before:w-[3px] before:h-12 before:bg-gradient-to-b before:from-cyan-400 before:to-blue-500"
       >
         {children}
@@ -130,9 +130,9 @@ const API_URL = import.meta.env.VITE_API_URL;
     ),
     img: ({ src, alt }) => (
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
+        // initial={{ opacity: 0, scale: 0.9 }}
+        // whileInView={{ opacity: 1, scale: 1 }}
+        // viewport={{ once: true }}
         className="my-20"
       >
         <img
@@ -145,9 +145,9 @@ const API_URL = import.meta.env.VITE_API_URL;
     ),
     ul: ({ children }) => (
       <motion.ul 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        // initial={{ opacity: 0, y: 20 }}
+        // whileInView={{ opacity: 1, y: 0 }}
+        // viewport={{ once: true }}
         className="my-8 space-y-4 max-w-2xl"
       >
         {children}
@@ -155,9 +155,9 @@ const API_URL = import.meta.env.VITE_API_URL;
     ),
     ol: ({ children }) => (
       <motion.ol 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        // initial={{ opacity: 0, y: 20 }}
+        // whileInView={{ opacity: 1, y: 0 }}
+        // viewport={{ once: true }}
         className="my-8 space-y-4 max-w-2xl list-decimal list-inside pl-4"
       >
         {children}
@@ -165,9 +165,9 @@ const API_URL = import.meta.env.VITE_API_URL;
     ),
     li: ({ children }) => (
       <motion.li 
-        initial={{ opacity: 0, x: -10 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
+        // initial={{ opacity: 0, x: -10 }}
+        // whileInView={{ opacity: 1, x: 0 }}
+        // viewport={{ once: true }}
         className="text-lg text-zinc-200 flex items-start gap-3"
       >
         <span className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mt-2.5 flex-shrink-0"></span>

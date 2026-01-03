@@ -148,18 +148,7 @@ export default function Home() {
         </AnimatePresence>
       </div>
 
-      {/* Floating CTA Button (appears after scroll) */}
-      <motion.button
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ 
-          opacity: showSections ? 1 : 0, 
-          y: showSections ? 0 : 20 
-        }}
-        whileHover={{ scale: 1.1, y: -5 }}
-        className="fixed bottom-8 right-8 z-30 w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl shadow-2xl border-4 border-white/20 backdrop-blur-xl flex items-center justify-center text-2xl shadow-lg hover:shadow-cyan-500/50"
-      >
-        ✨
-      </motion.button>
+     
     </div>
   );
 }

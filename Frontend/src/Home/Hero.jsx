@@ -69,8 +69,10 @@ export default function Hero() {
                 alt={element.title}
                 className="w-full h-48 md:h-52 object-cover group-hover:scale-110 transition-transform duration-700 rounded-2xl shadow-lg" 
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-              <div className="absolute -bottom-10 -right-10 w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl opacity-0 group-hover:opacity-100 transform group-hover:translate-x-4 group-hover:translate-y-4 transition-all duration-700 rotate-12"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-90 group-hover:opacity-100 transition-all duration-500"></div>
+              <div className="absolute -bottom-5 -right-5 w-15 h-15 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl opacity-80 group-hover:opacity-100 transform  transition-all duration-700 ">
+                <p className='flex justify-center items-center font-bold text-2xl'>{1+index}</p>
+              </div>
             </div>
 
             {/* Content */}
@@ -79,7 +81,7 @@ export default function Hero() {
                 {element.title}
               </h3>
               
-              <div className="flex items-center space-x-4 mb-6 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+              <div className="flex items-center space-x-4 mb-6 opacity-80 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-500">
                 <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl p-1">
                   <img 
                     src={element.adminPhoto} 
@@ -94,13 +96,11 @@ export default function Hero() {
               </div>
 
               {/* Read More Button */}
-              <div className="flex items-center opacity-0 group-hover:opacity-100 transform -translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+              <div className="flex items-center opacity-80 group-hover:opacity-100 transform -translate-y-2 group-hover:translate-y-0 transition-all duration-500">
                 <span className="text-sm font-semibold text-yellow-600 group-hover:text-yellow-700 mr-2">
                   Read More
                 </span>
-                <svg className="w-5 h-5 text-yellow-600 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+              
               </div>
             </div>
           </Link>

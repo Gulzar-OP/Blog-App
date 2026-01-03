@@ -48,7 +48,7 @@ const API_URL = import.meta.env.VITE_API_URL;
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 px-6 py-12">
+    <div className="min-h-screen bg-black px-6 py-12">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -30 }}
@@ -79,7 +79,7 @@ const API_URL = import.meta.env.VITE_API_URL;
           <p className="text-gray-500">Check back soon for fresh content!</p>
         </motion.div>
       ) : (
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className=" max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {blogs.map((blog, index) => (
             <motion.div
               key={blog._id}
@@ -157,7 +157,7 @@ const API_URL = import.meta.env.VITE_API_URL;
                     </div>
 
                     {/* Read Time & Stats */}
-                    <div className="flex items-center justify-between mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="flex items-center justify-between mb-4 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="flex items-center gap-4 text-sm text-gray-500">
                         <div className="flex items-center gap-1">
                           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -173,7 +173,7 @@ const API_URL = import.meta.env.VITE_API_URL;
                     {/* Hover Action Button */}
                     <motion.div
                       whileHover={{ scale: 1.05 }}
-                      className="opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center gap-2 mt-4"
+                      className="opacity-80 group-hover:opacity-100 transition-all duration-300 flex items-center gap-2 mt-4"
                     >
                       <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
                       <span className="text-sm font-semibold text-blue-600 hover:text-blue-700">Read Story</span>

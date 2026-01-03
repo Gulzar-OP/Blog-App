@@ -15,6 +15,7 @@ import BlogPage from "./pages/BlogPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import AdminBlog from './admin/AdminBlog.jsx';
 import MyProfile from './dashboard/MyProfile.jsx';
+import Test from './components/Test.jsx';
 
 export default function App() {
   const location = useLocation();
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="/creators" element={<Creators />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/test" element={<Test />} />
 
         {/* Dashboard Nested Route */}
         {/* <Route path="/dashboard" element={<Dashboard />} /> */}

@@ -52,7 +52,7 @@ const API_URL = import.meta.env.VITE_API_URL;
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-black to-zinc-900 flex items-center justify-center px-4 py-12 overflow-hidden">
+    <div className="min-h-screen min-w-screen bg-gradient-to-br from-zinc-950 via-black to-zinc-900 flex items-center justify-center px-4 py-12 overflow-hidden">
       {/* Animated Background Particles */}
       <div className="absolute inset-0">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" />

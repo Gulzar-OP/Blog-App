@@ -15,7 +15,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-br from-black via-zinc-950/90 to-zinc-900/80 pt-24 pb-12 px-6 md:px-12 lg:px-24 border-t-4 border-gradient-to-r from-purple-500/30 to-pink-500/30">
+    <footer className="relative overflow-hidden bg-black pt-24 pb-12 px-6 md:px-12 lg:px-24 border-t-4 border-gradient-to-r from-purple-500/30 to-pink-500/30">
       
 
       <div className="relative z-10 max-w-7xl mx-auto">

@@ -84,7 +84,7 @@ export default function About() {
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="text-6xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-zinc-100 via-white to-zinc-200 bg-clip-text drop-shadow-2xl mb-8 leading-[0.85] tracking-[-0.05em]"
+            className="text-6xl text-white md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-zinc-100 via-white to-zinc-200 bg-clip-text drop-shadow-2xl mb-8 leading-[0.85] tracking-[-0.05em]"
           >
             About<span className="block text-transparent bg-gradient-to-r from-purple-400 via-emerald-400 to-pink-400 bg-clip-text drop-shadow-2xl">GulBlog</span>
           </motion.h1>
