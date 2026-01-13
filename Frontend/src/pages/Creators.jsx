@@ -15,7 +15,7 @@ export default function Creators() {
       setLoading(false);
     }
   })
-
+// console.log("Writers from context:", writers);
   return (
     <div className="min-h-screen py-24 px-6 md:px-12 lg:px-24 bg-gradient-to-br from-black via-zinc-950/90 to-zinc-900/80 relative overflow-hidden">
       {/* Background Effects */}

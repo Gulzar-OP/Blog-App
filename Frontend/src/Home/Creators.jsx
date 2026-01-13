@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import axios from "axios";
 import { useAuth } from '../contextAPI/AuthProvider'
 import { motion } from "framer-motion";
 import { UserIcon, CodeBracketIcon, AcademicCapIcon } from "@heroicons/react/24/outline";
 import { Link } from 'react-router-dom';
 
 export default function Creators() {
-  // const [writer, setWriter] = useState([]);
   const [loading, setLoading] = useState(true);
-  const {writers} = useAuth();
+  const [writersData, setWritersData] = useState([]);
+  const { writers } = useAuth();
 
-  const API_URL = import.meta.env.VITE_API_URL;
-  
-  const writer = writers;
+  useEffect(() => {
+    if (writers && Array.isArray(writers) && writers.length > 0) {
+      setWritersData(writers);
+      setLoading(false);
+      console.log("Writers from context:", writers);
+    } else {
+      setLoading(false);
+    }
+  }, [writers]);
 
   const getRoleIcon = (role) => {
     switch (role?.toLowerCase()) {
@@ -34,10 +39,10 @@ export default function Creators() {
   return (
     <div className="min-h-screen py-24 px-6 md:px-12 lg:px-24 bg-gradient-to-b from-zinc-950 via-black/90 to-zinc-900 relative overflow-hidden">
       {/* Background Decorations */}
-      <div className="absolute inset-0">
+      {/* <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-emerald-500/3 to-cyan-500/3 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-b from-purple-500/3 to-pink-500/3 rounded-full blur-3xl animate-pulse delay-1000" />
-      </div>
+      </div> */}
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Hero Section */}
@@ -53,7 +58,7 @@ export default function Creators() {
             viewport={{ once: true }}
             className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-purple-500/20 backdrop-blur-xl rounded-full border border-emerald-400/30 font-mono text-lg tracking-widest text-emerald-300 shadow-2xl mb-8"
           >
-            ✨ Top Creators
+             Top Creators
           </motion.span>
           
           <motion.h1 
@@ -84,7 +89,7 @@ export default function Creators() {
             animate={{ opacity: 1 }}
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
           >
-            {[...Array(8)].map((_, i) => (
+            {Array.from({ length: 8 }).map((_, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -102,7 +107,7 @@ export default function Creators() {
               </motion.div>
             ))}
           </motion.div>
-        ) : writer.length === 0 ? (
+        ) : writersData.length === 0 ? (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -118,11 +123,11 @@ export default function Creators() {
             </p>
           </motion.div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-8">
-            {writer.map((user, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-4 gap-8">
+            {writersData.map((user, index) => (
               <Link 
                 key={user._id}
-                to={`/creators/${user._id }`}
+                to={`/creators/${user._id}`}
                 className="block h-full"
               >
                 <motion.div
@@ -148,12 +153,9 @@ export default function Creators() {
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 rounded-3xl backdrop-blur-xl -z-10 group-hover:opacity-100 opacity-0 transition-opacity duration-500" />
                     <img 
-                      src={user.photo?.url} 
+                      src={user.photo?.url || 'https://via.placeholder.com/112x112/1a1a1a/6b7280?text=👤'} 
                       alt={user.name}
                       className="w-full h-full rounded-3xl object-cover border-4 border-white/20 shadow-2xl group-hover:border-emerald-400/60 transition-all duration-500"
-                      onError={(e) => {
-                        e.target.src = 'https://via.placeholder.com/112x112/1a1a1a/6b7280?text=👤';
-                      }}
                     />
                     {/* Status Ring */}
                     <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-purple-500/20 blur opacity-75 animate-spin-slow" />
@@ -167,6 +169,11 @@ export default function Creators() {
                   >
                     {user.name}
                   </motion.h3>
+
+                  {/* Role Icon */}
+                  <div className="flex justify-center mb-6">
+                    {getRoleIcon(user.role)}
+                  </div>
 
                   {/* Education */}
                   {user.education && (
@@ -187,11 +194,11 @@ export default function Creators() {
                   >
                     <div className="flex items-center gap-2 text-xs text-zinc-500 font-mono bg-zinc-800/50 px-3 py-1.5 rounded-xl backdrop-blur-sm border border-zinc-700/50">
                       <span>⭐</span>
-                      <span>12.4k</span>
+                      <span>{user.rating || '12.4k'}</span>
                     </div>
                     <div className="flex items-center gap-1 text-xs text-zinc-500 font-mono bg-zinc-800/50 px-3 py-1.5 rounded-xl backdrop-blur-sm border border-zinc-700/50">
                       <span>📝</span>
-                      <span>47</span>
+                      <span>{user.posts?.length || 47}</span>
                     </div>
                   </motion.div>
                 </motion.div>
@@ -199,7 +206,6 @@ export default function Creators() {
             ))}
           </div>
         )}
-
       </div>
     </div>
   );

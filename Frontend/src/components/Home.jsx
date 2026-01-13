@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Hero from "../Home/Hero";
 import Trending from "../Home/Trending";
-import Games from "../Home/Games";
 import Creators from "../Home/Creators";
 import Code from "../Home/Code";
 import Loader from "../components/Loader";
@@ -36,12 +35,12 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-black/95 to-zinc-900 overflow-hidden relative">
       {/* Animated Background Particles */}
-      {/* <div className="fixed inset-0 z-0">
+      <div className="fixed inset-0 z-0">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-cyan-500/5 via-blue-500/5 to-purple-500/5 rounded-full blur-3xl animate-pulse" />
         <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-r from-purple-500/5 to-pink-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
         <div className="absolute top-1/2 left-10 w-64 h-64 bg-gradient-to-r from-emerald-400/3 to-cyan-400/3 rounded-full blur-2xl animate-pulse delay-500" />
         <div className="absolute bottom-1/2 right-20 w-72 h-72 bg-gradient-to-b from-orange-500/3 to-red-500/3 rounded-full blur-3xl animate-pulse delay-1500" />
-      </div> */}
+      </div>
 
       {/* Enhanced Loading Screen */}
       <AnimatePresence>
@@ -117,14 +116,7 @@ export default function Home() {
                 <Trending />
               </motion.div>
               
-              <motion.div
-                key="games"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-              >
-                <Games />
-              </motion.div>
+              
               
               <motion.div
                 key="code"

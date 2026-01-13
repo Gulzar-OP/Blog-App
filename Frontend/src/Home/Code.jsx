@@ -18,7 +18,7 @@ export default function Code() {
   }
 
   // Filter Programming & Technology blogs
-  const codeBlogs = blogs?.filter(blog => blog.category === "Programming & Technology");
+  const codeBlogs = blogs?.filter(blog => blog.category === "coding" || blog.category === "technology" || blog.category === "programming");
 
   return (
     <div className="min-h-screen py-24 px-6 md:px-12 lg:px-24 bg-gradient-to-b from-zinc-950 to-black/90 relative overflow-hidden">

@@ -1,12 +1,12 @@
-# 📝 MERN Stack Blog Application
+#  MERN Stack Blog Application
 
 A full‑stack **Blog Platform** built using **MongoDB, Express, React, and Node.js** with **role‑based access control**, real‑time notifications, and a scalable architecture.
 
 ---
 
-## 🚀 Features
+##  Features
 
-### 🔐 Authentication & Authorization
+###  Authentication & Authorization
 
 * User registration & login
 * JWT‑based authentication
@@ -31,7 +31,7 @@ A full‑stack **Blog Platform** built using **MongoDB, Express, React, and Node
 * Manage users
 * Moderate blogs
 
-### 📰 Blog System
+###  Blog System
 
 * CRUD operations on blogs
 * Category‑based blogs
@@ -96,7 +96,7 @@ JWT_SECRET=your_secret
 ---
 ## 👨‍💻 Author
 
-<img src="docss/profile.jpg" width="120" />
+<img src="docs/profile.jpg" width="120" />
 **Gulzar Hussain**  
 MERN Stack Developer
 
@@ -294,7 +294,7 @@ User (1) ──────< (M) Notification
 
 ## 🧠 ER Diagram 
 
-<img src="docss/blog.drawio.svg" width="700" height="500">
+<img src="docs/blog.drawio.svg" width="700" height="500">
 
 
 ## ✅ Design Decisions
