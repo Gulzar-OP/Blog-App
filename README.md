@@ -97,7 +97,6 @@ JWT_SECRET=your_secret
 ## 👨‍💻 Author
 
 <img src="docs/profile.jpg" width="120" />
-<img src="docs/default_blog.png" width="100">
 **Gulzar Hussain**  
 MERN Stack Developer
 
@@ -111,6 +110,9 @@ MERN Stack Developer
 * Bookmark blogs
 * Rich text editor
 
+# System Design
+
+<img src="docs/blog.drawio.svg" width="700" height="500">
 
 # 📡 API Documentation
 
