@@ -1,0 +1,218 @@
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if (!emailRegex.test(email)) {
+    fs.unlinkSync(photo.tempFilePath);
+    return res.status(400).json({ message: "Invalid email format" });
+}
+---------------------------------------
+Part	    Meaning
+^	        String ka start
+[^\s@]+	    @ aur space ke alawa kam se kam 1 character
+@	        @ symbol (required)
+[^\s@]+	    Domain name (gmail, yahoo etc.)
+\.	        Dot . compulsory
+[^\s@]+	    Domain extension (com, in, org)
+$	        String ka end
+
+emailRegex.test(email)
+.test() true deta hai agar email regex se match kare
+false deta hai agar match na kare
+
+🎯 Interview one-liner
+“Regex ka use email ka basic format validate karne ke liye kiya gaya hai, aur agar email invalid ho to uploaded temp file ko delete karke request ko reject kar diya jata hai.”
+
+-----------------------------------------
+const phoneRegex = /^[6-9]\d{9}$/;
+
+^ → start
+[6-9] → number 6,7,8,9 se start hoga
+\d{9} → baaki 9 digits
+$ → end
+
+🎯 Interview one-liner
+“Indian mobile numbers 10 digit hote hain aur 6–9 se start hote hain, isliye regex me [6-9]\d{9} use kiya gaya hai.”
+------------------------------------------
+secure: process.env.NODE_ENV === 'production'
+Environment	Value	Cookie behavior
+development	false	HTTP pe cookie kaam karegi
+production	true	Sirf HTTPS pe cookie jayegi
+
+❌ Agar production me secure: false rakho
+Cookie HTTP pe bhi send ho jayegi ❌
+Man-in-the-middle attack ka risk ⚠️
+Security issue (interview red flag)
+
+❌ Agar development me secure: true rakho
+localhost HTTP hai
+Cookie browser me set hi nahi hogi
+Login kaam nahi karega ❌
+-----------------------------------------
+❓ sameSite kya hota hai?
+sameSite browser ko batata hai:
+Cookie kab aur kis request ke sath bhejni hai
+Matlab:
+Same website se request → cookie jayegi
+Dusri website se request → cookie jayegi ya nahi
+🔹 sameSite: 'strict' ka matlab
+➜ Sabse strict rule 🔐
+✔ Cookie sirf same-site requests ke sath jayegi
+❌ Agar request dusri website se aayi → cookie nahi jayegi
+
+
+Bilkul 👍
+**`fs.unlinkSync(file.tempFilePath);` ko step-by-step, simple Hinglish me samjho** 👇
+
+---
+
+## 🔹 1️⃣ `fs` kya hai?
+
+`fs` = **File System** (Node.js ka built-in module)
+
+Iska use hota hai:
+
+* file read karne
+* file likhne
+* file delete karne
+
+```js
+import fs from "fs";
+```
+
+---
+
+## 🔹 2️⃣ `unlink` ka matlab?
+
+👉 **unlink = delete file**
+
+Linux / Unix term hai
+Matlab: *file ko system se hata do*
+
+---
+
+## 🔹 3️⃣ `unlinkSync` kya karta hai?
+
+```js
+fs.unlinkSync(path);
+```
+
+👉 **given path wali file ko turant delete karta hai**
+👉 **synchronous** hota hai (blocking)
+
+Matlab:
+
+* pehle file delete hogi
+* phir next line execute hogi
+
+---
+
+## 🔹 4️⃣ `file.tempFilePath` kya hota hai?
+
+Tum **`express-fileupload`** use kar rahe ho.
+
+Jab user image upload karta hai:
+
+* wo image pehle **server ke temp folder (`./tmp/`)** me store hoti hai
+* uska path hota hai:
+
+```js
+file.tempFilePath
+```
+
+Example:
+
+```
+./tmp/upload_3f8sdj23.png
+```
+
+---
+
+## 🔹 5️⃣ Puri line ka matlab (plain English)
+
+```js
+fs.unlinkSync(file.tempFilePath);
+```
+
+👉 “Jo image abhi temp folder me upload hui thi,
+use ab permanently delete kar do.”
+
+---
+
+## 🔥 REAL LIFE FLOW (Create / Update Blog)
+
+### 🟢 Step-1: User image upload karta hai
+
+```
+Frontend → Backend
+```
+
+### 🟢 Step-2: express-fileupload image ko temp folder me rakhta hai
+
+```
+./tmp/abc123.png
+```
+
+### 🟢 Step-3: Tum Cloudinary pe upload kar dete ho
+
+```js
+cloudinary.uploader.upload(file.tempFilePath)
+```
+
+### 🔴 Step-4: Ab local temp file ki koi zarurat nahi
+
+👉 **delete karo**
+
+```js
+fs.unlinkSync(file.tempFilePath);
+```
+
+---
+
+## ❗ Agar delete na karo to kya hoga?
+
+❌ Temp folder bhar jaayega
+❌ Server disk full ho sakta hai
+❌ Production me crash risk
+
+Isliye **ye line VERY IMPORTANT hai** ⚠️
+
+---
+
+## 🧠 Sync vs Async (extra gyaan 😄)
+
+### Sync (tum jo use kar rahe ho)
+
+```js
+fs.unlinkSync(path);
+```
+
+✔ simple
+✔ small files ke liye OK
+
+### Async (production heavy load)
+
+```js
+fs.unlink(path, (err) => {
+  if (err) console.error(err);
+});
+```
+
+---
+
+## ✅ SHORT SUMMARY (1 line)
+
+```js
+fs.unlinkSync(file.tempFilePath);
+```
+
+👉 **Cloudinary upload ke baad, server ke temp folder se image delete karta hai**
+
+---
+
+Agar chaho to next:
+
+* ❓ `tempFilePath` kaise banta hai
+* ⚖️ `multer vs express-fileupload`
+* 🚀 Production best practices
+
+Bas bolo 😄
