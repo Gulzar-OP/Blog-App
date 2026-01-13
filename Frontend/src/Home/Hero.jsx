@@ -15,7 +15,7 @@ export default function Hero() {
       minute: "2-digit",
     });
   }
-
+  console.log(blogs);
   if (!blogs || blogs.length === 0) {
     return (
       <div className="container mx-auto my-20 p-12 text-center">

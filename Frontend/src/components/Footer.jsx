@@ -44,7 +44,7 @@ export default function Footer() {
              
               <div>
                 <h2 className="text-white text-3xl lg:text-4xl font-black bg-gradient-to-r from-zinc-200 via-white to-zinc-300 bg-clip-text drop-shadow-2xl">
-                  Gul<span className="bg-gradient-to-r from-purple-500 via-pink-500 to-blue-600 bg-clip-text drop-shadow-2xl text-blue-500">Blog</span>
+                  Blog<span className="bg-gradient-to-r from-purple-500 via-pink-500 to-blue-600 bg-clip-text drop-shadow-2xl text-blue-500">Sphere</span>
                 </h2>
                 <p className="text-zinc-700 text-xl mt-3 leading-relaxed max-w-md backdrop-blur-sm">
                   Building modern web experiences with clean code and elegant UI/UX design.

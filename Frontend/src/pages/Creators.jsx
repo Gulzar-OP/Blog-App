@@ -3,45 +3,18 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { BsEnvelope } from "react-icons/bs";
 import toast from "react-hot-toast";
+import { useAuth } from "../contextAPI/AuthProvider";
 
 export default function Creators() {
-  const [writers, setWriters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const url = "http://localhost:3000";
-
-  // const API_URL="http://blog-app-back-nine.vercel.app"
+  const { writers } = useAuth();
   const API_URL = import.meta.env.VITE_API_URL;
-  useEffect(() => {
-    const fetchWriter = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const { data } = await axios.get(
-          `${API_URL}/api/users/getWriter`,
-          { withCredentials: true }
-        );
-        console.log("Raw admin data:", data);
-        if (data.writers && Array.isArray(data.writers)) {
-          setWriters(data.writers);
-        } else {
-          setWriters([]);
-        }
-      } catch (err) {
-        console.error("Error fetching admin:", err);
-        setError(
-          err.response?.status === 401 
-            ? "Please login to see creators" 
-            : "Failed to load creators"
-        );
-        setWriters([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-   fetchWriter();
-  }, []);
+  useEffect(()=>{
+    if(writers.length>0){
+      setLoading(false);
+    }
+  })
 
   return (
     <div className="min-h-screen py-24 px-6 md:px-12 lg:px-24 bg-gradient-to-br from-black via-zinc-950/90 to-zinc-900/80 relative overflow-hidden">

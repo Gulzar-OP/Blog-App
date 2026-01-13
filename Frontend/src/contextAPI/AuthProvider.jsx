@@ -13,6 +13,7 @@ export const AuthContext = createContext();
 export default function AuthProvider({ children }) {
   const API_URL = import.meta.env.VITE_API_URL;
   const [blogs, setBlogs] = useState([]);
+  const [writers, setWriters] = useState([]);
   const [profile, setProfile] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -60,12 +61,23 @@ export default function AuthProvider({ children }) {
       setBlogs([]);
     }
   }, []);
+  const fetchWriters = useCallback(async () => {
+    try {
+      const response = await axios.get(`${API_URL}/api/users/getWriter`);
+      setWriters(response.data.writers || []);
+      // console.log(response.data);
+    } catch (error) {
+      console.error("Failed to fetch blogs:", error);
+      setWriters([]);
+    }
+  }, []);
 
   // Initial load
   useEffect(() => {
     checkAuth();
     fetchBlogs();
-  }, [checkAuth, fetchBlogs]);
+    fetchWriters();
+  }, [checkAuth, fetchBlogs, fetchWriters]);
 
   // Refresh blogs function
   const refreshBlogs = useCallback(() => {
@@ -75,6 +87,8 @@ export default function AuthProvider({ children }) {
   const value = {
     blogs,
     profile,
+    writers,
+
     isAuthenticated,
     loading,
     refreshBlogs,

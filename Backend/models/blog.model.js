@@ -24,11 +24,11 @@ const blogSchema = new mongoose.Schema({
         type:String,
     },
 
-    adminName:{
+    writerName:{
         type:String,
         // required:true
     },
-    adminPhoto:{
+    writerPhoto:{
         type:String,
         // required:true
     },

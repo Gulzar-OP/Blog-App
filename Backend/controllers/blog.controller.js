@@ -49,7 +49,6 @@ export const createBlog = async (req, res) => {
         url: uploadResult.secure_url,
       };
     }
-    const no_ofBlogs = writer.no_ofBlogs + 1;
     await User.findByIdAndUpdate(
       writerId,
       { $inc: { no_ofBlogs: 1 } }
@@ -63,8 +62,8 @@ export const createBlog = async (req, res) => {
       category,
       about,
       blogImage,
-      adminName: writer.name,
-      adminPhoto: writer.photo?.url,
+      writerName: writer.name,
+      writerhoto: writer.photo?.url,
       createdBy: writerId,
       no_ofBlogs: writer.no_ofBlogs,
     });

@@ -110,9 +110,6 @@ MERN Stack Developer
 * Bookmark blogs
 * Rich text editor
 
-# System Design
-
-<img src="docs/blog.drawio.svg" width="700" height="500">
 
 # 📡 API Documentation
 
@@ -295,71 +292,35 @@ User (1) ──────< (M) Notification
 
 ---
 
-## 🧠 ER Diagram (Textual Representation)
+## 🧠 ER Diagram 
 
-```
-+-----------+       1        M       +-----------+
-|   User    |---------------------->|   Blog    |
-+-----------+                       +-----------+
-| _id (PK)  |                       | _id (PK)  |
-| name      |                       | title     |
-| email     |                       | content   |
-| password  |                       | category  |
-| role      |                       | user_idFK |
-+-----------+                       +-----------+
-      |
-      | 1
-      |
-      | M
-+--------------+
-| Notification |
-+--------------+
-| _id (PK)     |
-| title        |
-| message      |
-| isRead       |
-| user_id (FK) |
-+--------------+
-```
+<img src="docs/blog.drawio.svg" width="700" height="500">
 
----
 
 ## ✅ Design Decisions
 
 * **Role stored inside User** → simple & scalable
 * **Reference-based relations** using MongoDB ObjectId
-* Easy to extend (Comments, Likes, Bookmarks)
 
 ---
 
-## 🚀 Future Extensions (ER Ready)
+<table>
+  <tr>
+    <td><img src="doc/image1.png" width="400" /></td>
+    <td><img src="doc/image2.png" width="400" /></td>
+  </tr>
+  <tr>
+    <td><img src="doc/image3.png" width="400" /></td>
+    <td><img src="doc/image4.png" width="400" /></td>
+  </tr>
+  <tr>
+    <td><img src="doc/image5.png" width="400" /></td>
+    <td><img src="doc/image6.png" width="400" /></td>
+  </tr>
+  <tr>
+    <td><img src="doc/image7.png" width="400" /></td>
+    <td><img src="doc/image8.png" width="400" /></td>
+  </tr>
+</table>
 
-### Comment
-
-```
-Comment
--------
-_id
-blog_id (FK)
-user_id (FK)
-text
-createdAt
-```
-
-### Like / Bookmark
-
-```
-Like
-----
-user_id
-blog_id
-```
-
----
-
-## 🎯 Interview Tip
-
-> "This ER design follows normalization, avoids redundancy, and supports role‑based access with scalable relationships."
-## 🗂️ ER Diagram
-![ER Diagram](frontend/public/blog.drawio.svg)
 

@@ -140,6 +140,7 @@ export default function writerBlog() {
       );
       
       const createdBlog = res.data.blog;
+      console.log("Created Blog:", createdBlog);
       toast.success("Blog created successfully");
       createPostNotification(createdBlog);
       resetForm();
@@ -250,7 +251,7 @@ export default function writerBlog() {
           className="text-center mb-20"
         >
           <h1 className="text-white text-6xl md:text-8xl font-black bg-gradient-to-r from-zinc-200 via-white to-zinc-300 bg-clip-text drop-shadow-2xl mb-6 tracking-tight">
-            writer DASHBOARD
+            ADMIN DASHBOARD
           </h1>
           <p className="text-2xl text-zinc-400 max-w-3xl mx-auto leading-relaxed backdrop-blur-sm px-12 py-6 bg-black/40 rounded-4xl border border-zinc-700/50 shadow-2xl">
             Manage, create, and organize your blog posts with precision

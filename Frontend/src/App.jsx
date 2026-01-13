@@ -57,9 +57,9 @@ const AppContent = () => {
 
         {/* Admin Only Routes */}
         <Route 
-          path='/admin-blog' 
+          path='/admin-dashboard' 
           element={
-            <ProtectedRoutes adminOnly={true}>
+            <ProtectedRoutes>
               <AdminBlog />
             </ProtectedRoutes>
           } 

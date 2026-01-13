@@ -23,7 +23,7 @@ const ProtectedRoutes = ({ children, adminOnly = false }) => {
     // Admin only route
   if (adminOnly) {
     if (isAdmin) {
-      return children;  // ✅ Admin = access granted
+      return children; 
     } else if (user) {
       // 👈 FIXED: Logged user but not admin → my-profile
       return <Navigate to="/my-profile" replace />;

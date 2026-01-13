@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../contextAPI/AuthProvider";
 
 export default function Blogs() {
-  const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [hoveredId, setHoveredId] = useState(null);
-
+  const { blogs } = useAuth();
   function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleString("en-IN", {
@@ -18,22 +18,14 @@ export default function Blogs() {
       minute: "2-digit",
     });
   }
-// const API_URL="http://blog-app-back-nine.vercel.app"
+  console.log("Blogs from context:", blogs);
 const API_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        setLoading(true);
-        const { data } = await axios.get(`${API_URL}/api/blogs/all-blogs`);
-        setBlogs(data.blogs);
-      } catch (error) {
-        console.log("Error fetching blogs:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchBlogs();
-  }, []);
+    if (blogs.length > 0) {
+      setLoading(false);
+    }
+  }, [blogs]);
 
   if (loading) {
     return (
@@ -98,7 +90,7 @@ const API_URL = import.meta.env.VITE_API_URL;
                   <div className="relative h-60">
                     <img
                       src={blog?.blogImage?.url || "/default_blog.png"}
-                      alt={blog.about}
+                      alt={blog.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                       loading="lazy"
                     />
@@ -133,19 +125,10 @@ const API_URL = import.meta.env.VITE_API_URL;
                   </div>
 
                   {/* Content Section */}
-                  <div className="p-8">
+                  <div className="p-8 ">
                     {/* Author Avatar */}
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="relative">
-                        <img
-                          src={blog.adminPhoto}
-                          alt="Author"
-                          className="w-14 h-14 rounded-2xl object-cover border-4 border-gradient-to-r from-yellow-400 via-orange-400 to-yellow-500 shadow-xl ring-4 ring-white/50 hover:ring-blue-200 transition-all duration-300"
-                        />
-                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 border-3 border-white rounded-full flex items-center justify-center shadow-lg">
-                          <div className="w-1 h-1 bg-white rounded-full animate-ping"></div>
-                        </div>
-                      </div>
+                     
                       <div>
                         <p className="font-bold text-gray-900 text-lg leading-tight line-clamp-2 group-hover:text-blue-600 transition-colors">
                           {blog.about}

@@ -69,10 +69,10 @@ export default function Home() {
               className="text-center absolute bottom-20"
             >
               <div className="inline-flex items-center gap-3 bg-gradient-to-r from-zinc-600 to-zinc-400 bg-clip-text text-transparent text-4xl font-black tracking-tight mb-4">
-                Gul<span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent drop-shadow-2xl">Blog</span>
+                Blog<span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent drop-shadow-2xl">Sphere</span>
               </div>
               <div className="text-xl text-zinc-500 font-mono tracking-wider">
-                Loading your experience...
+                Please wait, blogs loading…
               </div>
             </motion.div>
           </motion.div>

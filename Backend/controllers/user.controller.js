@@ -84,14 +84,14 @@ export const register = async (req, res) => {
 /* ================= LOGIN ================= */
 export const login = async (req, res) => {
   try {
-    const { email, password, role } = req.body;
+    const { email, password} = req.body;
 
-    if (!email || !password || !role) {
+    if (!email || !password) {
       return res.status(400).json({ message: "All fields required" });
     }
 
     const user = await User.findOne({ email }).select("+password");
-    if (!user || user.role !== role) {
+    if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
@@ -115,7 +115,7 @@ export const login = async (req, res) => {
       token,
     });
   } catch (err) {
-    console.error("Login error:", err);
+    // console.error("Login error:", err);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };

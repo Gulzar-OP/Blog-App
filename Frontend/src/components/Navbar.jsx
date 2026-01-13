@@ -30,9 +30,9 @@ export default function Navbar() {
   const {user} = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-useEffect(() => {
-  console.log("Login User in Navbar:", user);
-}, [user]);
+// useEffect(() => {
+//   console.log("Login User in Navbar:", user);
+// }, [user]);
 
 
   // Active path detection helper
@@ -110,7 +110,7 @@ useEffect(() => {
   // ✅ Fixed: Single socket notification handler
   const handleBlogNotification = useCallback((data) => {
     setNotifications((prev) => [data, ...prev.slice(0, 9)]); // Keep last 10 max
-    toast.success(data.message || "New notification!");
+    // toast.success(data.message || "New notification!");
   }, []);
 
   // ✅ Fixed: Socket listeners
@@ -192,7 +192,9 @@ useEffect(() => {
   }, [closeMobileMenu, closeProfileDropdown]);
   // console.log("User Role:", user?.role);
   const isAdmin = user?.role === "admin" ;
+  // console.log("Is Admin:", isAdmin);
   const isWriter = user?.role === "writer" ;
+  // console.log("Is Writer:", isWriter);
   // console.log("Is Admin:", isAdmin);
   const userInitial = user?.name?.charAt(0)?.toUpperCase() || "U";
   const unreadCount = notifications.filter((n) => !n.isRead).length;
@@ -213,9 +215,9 @@ useEffect(() => {
             to="/"
             className="text-white text-2xl md:text-3xl font-black bg-gradient-to-r from-zinc-200 via-white to-zinc-300 bg-clip-text tracking-tight hover:from-purple-400 hover:to-pink-400 transition-all duration-500"
           >
-            Gul
+            Blog
             <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500 bg-clip-text text-transparent">
-              Blog
+              Sphere
             </span>
           </Link>
         </motion.div>
@@ -260,7 +262,7 @@ useEffect(() => {
               {isAdmin && (
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  onClick={() => navigate("/admin-blog")}
+                  onClick={() => navigate("/admin-dashboard")}
                   className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-500/20 to-green-500/20 backdrop-blur-xl rounded-2xl border border-emerald-400/40 text-emerald-300 hover:text-emerald-100 font-semibold text-sm shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 cursor-pointer"
                 >
                    Admin Deshboard 
@@ -491,7 +493,7 @@ useEffect(() => {
                       </Link>
                       <button
                         onClick={logout}
-                        className="flex items-center gap-4 w-full px-6 py-4 hover:bg-red-500/20 hover:text-red-300 transition-all duration-300 text-left"
+                        className="text-white flex items-center gap-4 w-full px-6 py-4 hover:bg-red-500/20 hover:text-red-300 transition-all duration-300 text-left"
                       >
                         <FaSignOutAlt className="w-5 h-5" />
                         <span className="font-semibold">Logout</span>
@@ -701,7 +703,7 @@ useEffect(() => {
                   <div className="pt-6 border-t border-zinc-700/50">
                     <button
                       onClick={logout}
-                      className="flex items-center gap-3 w-full px-6 py-4 bg-gradient-to-r from-red-500/20 to-red-500/10 backdrop-blur-xl rounded-2xl border border-red-400/40 text-red-300 hover:text-red-100 hover:bg-red-500/30 font-semibold shadow-lg hover:shadow-red-500/25 transition-all duration-300"
+                      className=" flex items-center gap-3 w-full px-6 py-4 bg-gradient-to-r from-red-500/20 to-red-500/10 backdrop-blur-xl rounded-2xl border border-red-400/40 text-red-300 hover:text-red-100 hover:bg-red-500/30 font-semibold shadow-lg hover:shadow-red-500/25 transition-all duration-300"
                     >
                       <FaSignOutAlt className="w-5 h-5" /> Logout
                     </button>

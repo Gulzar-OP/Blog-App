@@ -1,35 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
+import { useAuth } from '../contextAPI/AuthProvider'
 import { motion } from "framer-motion";
 import { UserIcon, CodeBracketIcon, AcademicCapIcon } from "@heroicons/react/24/outline";
 import { Link } from 'react-router-dom';
 
 export default function Creators() {
-  const [writer, setWriter] = useState([]);
+  // const [writer, setWriter] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {writers} = useAuth();
 
   const API_URL = import.meta.env.VITE_API_URL;
-
-  useEffect(() => {
-    const fetchWriter = async () => {
-      try {
-        setLoading(true);
-        const { data } = await axios.get(
-          `${API_URL}/api/users/getWriter`,
-          { withCredentials: true }
-        );
-        console.log("Raw writer data:", data);
-        setWriter(Array.isArray(data.writers) ? data.writers.slice(0, 5) : []);
-        console.log("Fetched writer data:", data);
-      } catch (error) {
-        console.log("Error fetching writer:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchWriter();
-  }, []);
+  
+  const writer = writers;
 
   const getRoleIcon = (role) => {
     switch (role?.toLowerCase()) {

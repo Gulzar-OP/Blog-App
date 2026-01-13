@@ -22,7 +22,7 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (!email || !password || !role) {
+    if (!email || !password) {
       toast.error("Please fill all fields");
       return;
     }
@@ -110,7 +110,7 @@ export default function Login() {
 
           <form onSubmit={handleLogin} className="space-y-6">
             {/* Role Selection */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -131,7 +131,7 @@ export default function Login() {
                   <option value="writer">⚙️ Writer</option>
                 </select>
               </div>
-            </motion.div>
+            </motion.div> */}
 
             {/* Email */}
             <motion.div
