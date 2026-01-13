@@ -96,7 +96,7 @@ JWT_SECRET=your_secret
 ---
 ## 👨‍💻 Author
 
-<img src="docs/profile.jpg" width="120" />
+<img src="docss/profile.jpg" width="120" />
 **Gulzar Hussain**  
 MERN Stack Developer
 
@@ -111,7 +111,7 @@ MERN Stack Developer
 * Rich text editor
 
 
-# 📡 API Documentation
+# 📡 API docsumentation
 
 Base URL: `/api`
 
@@ -294,7 +294,7 @@ User (1) ──────< (M) Notification
 
 ## 🧠 ER Diagram 
 
-<img src="docs/blog.drawio.svg" width="700" height="500">
+<img src="docss/blog.drawio.svg" width="700" height="500">
 
 
 ## ✅ Design Decisions
@@ -306,20 +306,20 @@ User (1) ──────< (M) Notification
 
 <table>
   <tr>
-    <td><img src="doc/image1.png" width="400" /></td>
-    <td><img src="doc/image2.png" width="400" /></td>
+    <td><img src="docs/image1.png" width="400" /></td>
+    <td><img src="docs/image2.png" width="400" /></td>
   </tr>
   <tr>
-    <td><img src="doc/image3.png" width="400" /></td>
-    <td><img src="doc/image4.png" width="400" /></td>
+    <td><img src="docs/image3.png" width="400" /></td>
+    <td><img src="docs/image4.png" width="400" /></td>
   </tr>
   <tr>
-    <td><img src="doc/image5.png" width="400" /></td>
-    <td><img src="doc/image6.png" width="400" /></td>
+    <td><img src="docs/image5.png" width="400" /></td>
+    <td><img src="docs/image6.png" width="400" /></td>
   </tr>
   <tr>
-    <td><img src="doc/image7.png" width="400" /></td>
-    <td><img src="doc/image8.png" width="400" /></td>
+    <td><img src="docs/image7.png" width="400" /></td>
+    <td><img src="docs/image8.png" width="400" /></td>
   </tr>
 </table>
 
